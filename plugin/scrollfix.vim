@@ -84,7 +84,7 @@ function! ScrollFix()
     let fixline = ( winheight(0) * g:scrollfix ) / 100
 
     let dict = winsaveview()
-    if dict['lnum'] < fixline | return | endif
+    if dict['lnum'] < fixline - 3 | return | endif
     if dict['lnum'] - dict['topline'] + 1 == fixline | return | endif
 
     " if eof line is visible and visual-line is >= fixline, don't fix cursor
