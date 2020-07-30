@@ -84,8 +84,8 @@ function! ScrollFix()
     let fixline = ( winheight(0) * g:scrollfix ) / 100
 
     let dict = winsaveview()
-    if dict['lnum'] < fixline - 3 | return | endif
-    if dict['lnum'] - dict['topline'] + 1 == fixline | return | endif
+    if dict['lnum'] <= fixline && dict['topline'] == 1 | return | endif
+    if dict['lnum'] - dict['topline'] == fixline | return | endif
 
     " if eof line is visible and visual-line is >= fixline, don't fix cursor
     if g:fixeof
@@ -94,7 +94,7 @@ function! ScrollFix()
         endif
     endif
 
-    let dict['topline'] = dict['lnum'] - fixline + 1
+    let dict['topline'] = dict['lnum'] - fixline
     " let g:last = dict
     call winrestview(dict)
 
